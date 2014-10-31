@@ -1,0 +1,5 @@
+Before merge 
+LeftistHeap
+After merge 
+LeftistHeap
+Elapsed time = 0.129
