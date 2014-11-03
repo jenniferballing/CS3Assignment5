@@ -5,17 +5,18 @@
 class Leftist : public PQ
 {
 public:
-	Leftist(string, int);
+	Leftist(string);
 	~Leftist();
+	void insert(ItemType &, Node *, Node *);
 	void insert(ItemType &); 
 	ItemType deleteMax();
 	void merge(PQ *h);  
 	string toString(int size)const;
+	string treeString(Node *)const;
 	bool isHappy(ItemType &);	
 private:
-	ItemType * lHeap;
-	int lHeapSize;
 	string indent = " ";
+	Node *root;
 };
 #endif
 

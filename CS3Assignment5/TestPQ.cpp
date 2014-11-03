@@ -13,10 +13,10 @@ int main()
 	int const PRINTSIZE = 5;
 	int const HOWMANY = 10;  // How many values to read from each file.  If HOWMANY = 0, read all values.
 	// SkewHeap pq1("SkewHeap PQ1");
-	//Leftist pq1Left("Leftist PQ1", 6000);
+	Leftist pq1("Leftist PQ1");
 	
-	/*PQHeap pq1("Heap PQ1", 6000);
-	PQHeap pq2("Heap PQ2", 6000);
+	//PQHeap pq1("Heap PQ1");
+	/*PQHeap pq2("Heap PQ2", 6000);
 	PQHeap pq3("Heap PQ3", 6000);
 	PQHeap pq4("Heap PQ4", 6000);
 	PQHeap pq5("Heap PQ5", 6000);
@@ -29,7 +29,7 @@ int main()
 	SkewHeap pq5("SkewHeap PQ5");
 	SkewHeappq6("SkewHeap PQ6");
 	*/
-	Leftist pq1("LeftistHeap PQ1", 1000);
+	//Leftist pq1("LeftistHeap PQ1", 1000);
 	/*Leftist pq2("LeftistHeap PQ2");
 	Leftist pq3("LeftistHeap PQ3");
 	Leftist pq4("LeftistHeap PQ4");
@@ -52,7 +52,7 @@ int main()
 	fout.open("prog5out.txt");
 	cout << pq1.toString(PRINTSIZE);
 
-	for (int ct = 0; ct < DELETE_CT && !pq1.isEmpty(); ct++){
+	/*for (int ct = 0; ct < DELETE_CT && !pq1.isEmpty(); ct++){
 		ItemType big = pq1.deleteMax();
 		fout << " ** DELETED " << big.toString() << endl;
 		cout << " ** DELETED " << big.toString() << endl;
