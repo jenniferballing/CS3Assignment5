@@ -11,7 +11,7 @@ int main()
 	clock_t start = clock();
 	int const DELETE_CT = 20;
 	int const PRINTSIZE = 5;
-	int const HOWMANY = 10;  // How many values to read from each file.  If HOWMANY = 0, read all values.
+	int const HOWMANY = 5;  // How many values to read from each file.  If HOWMANY = 0, read all values.
 	// SkewHeap pq1("SkewHeap PQ1");
 	Leftist pq1("Leftist PQ1");
 	
@@ -50,7 +50,7 @@ int main()
 	cout << pq1.toString(PRINTSIZE);
 	ofstream fout;
 	fout.open("prog5out.txt");
-	cout << pq1.toString(PRINTSIZE);
+	//cout << pq1.toString(PRINTSIZE);
 
 	/*for (int ct = 0; ct < DELETE_CT && !pq1.isEmpty(); ct++){
 		ItemType big = pq1.deleteMax();
@@ -97,6 +97,7 @@ void insertNext(PQ & pq, ifstream & fin, int limit)
 	int ct;
 	while (!fin.eof() && pq.size < limit)
 	{
+		pq.size++;
 		fin >> word >> ct;
 		pq.insert(ItemType(word, ct));
 	}

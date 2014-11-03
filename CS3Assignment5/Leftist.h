@@ -7,12 +7,13 @@ class Leftist : public PQ
 public:
 	Leftist(string);
 	~Leftist();
-	void insert(ItemType &, Node *, Node *);
+	void insert(ItemType &, Node *);
 	void insert(ItemType &); 
 	ItemType deleteMax();
 	void merge(PQ *h);  
 	string toString(int size)const;
-	string treeString(Node *)const;
+	string treeString(Node *, string)const;
+	Node* findParent(Node *, Node*)const;
 	bool isHappy(ItemType &);	
 private:
 	string indent = " ";

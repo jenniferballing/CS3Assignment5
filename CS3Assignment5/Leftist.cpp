@@ -5,6 +5,7 @@
 Leftist::Leftist(string n)
 {
 	name = n;
+	size = 0;
 }
 
 void Leftist::insert(ItemType &i)
@@ -16,33 +17,57 @@ void Leftist::insert(ItemType &i)
 		return;
 	}
 
-	insert(i, root->right, root->left);	
+	insert(i, root);	
 }
-void Leftist::insert(ItemType &i, Node *r, Node*l)
+void Leftist::insert(ItemType &i, Node *parent)
 {
-	//if there is no right child, make one
-	if (r == NULL)
+	if (i.priority > parent->element.priority)
 	{
-		Node *newNode = new Node(i, NULL, NULL);
-		r = newNode;
-	}
-
-	//if there is a right child, keep moving down
-	if (r->right != NULL)
-	{
-		insert(i, r->right, r->left);
-	}
-
-	//check for swap
-	if (l != NULL)
-	{
-		if (r->npl < l->npl)
+		Node * grandP, *newParent;
+		if (parent != root)
 		{
-			Node *temp = r;
-			r = l;
-			l = temp;
+			grandP = findParent(parent, root);
+			newParent = new Node(i, NULL, parent);
+			grandP->right = newParent;
+			parent = newParent;
+		}
+		else
+		{
+			root = new Node(i, NULL, parent);
+			parent = root;
 		}
 	}
+	else if (parent->right == NULL)
+	{
+		Node *newNode = new Node(i, NULL, NULL);
+		parent->right = newNode;
+	}
+	else insert(i, parent->right);
+
+	//check for swap
+	if (parent->left != NULL && parent->right != NULL)
+	{
+		if (parent->left->npl > parent->right->npl)
+		{
+			Node* temp = parent->right;
+			parent->right = parent->left;
+			parent->left = temp;
+		}
+	}
+	if (parent->left == NULL && parent->right != NULL)
+	{
+		Node* temp = parent->right;
+		parent->right = parent->left;
+		parent->left = temp;
+	}
+}
+
+Node* Leftist::findParent(Node* child, Node* root) const
+{
+	if (root == NULL) return NULL;
+	if (root->left == child || root->right == child) return root;
+	findParent(child, root->right);
+	findParent(child, root->left);
 }
 ItemType Leftist::deleteMax()
 {
@@ -56,12 +81,26 @@ string Leftist::toString(int printSize)const
 {
 	if (printSize > size)printSize = size;
 	string tree = name + " current size = " + to_string(size);
-	tree += treeString(root);
+	string i = "  ";
+	tree += treeString(root, i);
 	return tree;
 }
-string Leftist::treeString(Node *i)const
+string Leftist::treeString(Node *i, string indent)const
 {
-	return i->element.word + "\n" + treeString(i->left) + treeString(i->right) + "\n";
+	string left, right;
+	if (i == NULL) return "";
+	else
+	{
+		Node * parent;
+		parent = findParent(i, root);
+	}
+
+	if (i->left != NULL)left = "\n" + treeString(i->left, indent + "   ");
+	else left = "";
+	if (i->right != NULL)right = "\n" + treeString(i->right, indent + "   ");
+	else right = "";
+
+	return right + indent + i->element.word + left + "\n";	
 }
 
 bool Leftist::isHappy(ItemType &)
