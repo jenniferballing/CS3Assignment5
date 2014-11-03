@@ -10,7 +10,8 @@ public:
 	void insert(ItemType &, Node *);
 	void insert(ItemType &); 
 	ItemType deleteMax();
-	void merge(PQ *h);  
+	void merge(PQ *h); 
+	Node* merge(Node*, Node*);
 	string toString(int size)const;
 	string treeString(Node *, string)const;
 	Node* findParent(Node *, Node*)const;

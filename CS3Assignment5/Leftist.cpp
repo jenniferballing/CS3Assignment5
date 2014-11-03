@@ -1,6 +1,7 @@
 #include "Leftist.h"
 #include <math.h>
 
+void checkSwap(Node*, Node*);
 
 Leftist::Leftist(string n)
 {
@@ -66,13 +67,51 @@ Node* Leftist::findParent(Node* child, Node* root) const
 {
 	if (root == NULL) return NULL;
 	if (root->left == child || root->right == child) return root;
-	findParent(child, root->right);
-	findParent(child, root->left);
+    return	findParent(child, root->right);
+	return findParent(child, root->left);
 }
 ItemType Leftist::deleteMax()
 {
-	ItemType j;
-	return j;
+	Node *right = root->right, *left = root->left;
+	Node *merged = merge(right, left);
+	return root->element;	
+}
+Node* Leftist::merge(Node* right, Node* left)
+{
+	if (right == NULL)return left;
+	if (left == NULL)return right;
+	Node* newRoot = NULL;
+
+	if (right->element.priority > left->element.priority)
+	{
+		newRoot = right;
+		right = merge(right->right, left);		
+	}
+	if (left->element.priority > right->element.priority)
+	{
+		newRoot = left;
+		left = merge(right, left->right);
+	}
+	checkSwap(right, left);
+	return newRoot;
+}
+void checkSwap(Node* one, Node* two)
+{
+	if (one != NULL && two != NULL)
+	{
+		if (one->npl > two->npl)
+		{
+			Node* temp = two;
+			two = one;
+			one = temp;
+		}
+	}
+	if (one == NULL && two != NULL)
+	{
+		Node* temp =two;
+		two = one;
+		one = temp;
+	}
 }
 void Leftist::merge(PQ *h)
 {

@@ -10,12 +10,12 @@ int main()
 {
 	clock_t start = clock();
 	int const DELETE_CT = 20;
-	int const PRINTSIZE = 5;
-	int const HOWMANY = 5;  // How many values to read from each file.  If HOWMANY = 0, read all values.
+	int const PRINTSIZE = 25;
+	int const HOWMANY = 25;  // How many values to read from each file.  If HOWMANY = 0, read all values.
 	// SkewHeap pq1("SkewHeap PQ1");
-	Leftist pq1("Leftist PQ1");
-	
+	//Leftist pq1("Leftist PQ1");
 	//PQHeap pq1("Heap PQ1");
+	
 	/*PQHeap pq2("Heap PQ2", 6000);
 	PQHeap pq3("Heap PQ3", 6000);
 	PQHeap pq4("Heap PQ4", 6000);
@@ -29,27 +29,30 @@ int main()
 	SkewHeap pq5("SkewHeap PQ5");
 	SkewHeappq6("SkewHeap PQ6");
 	*/
-	//Leftist pq1("LeftistHeap PQ1", 1000);
-	/*Leftist pq2("LeftistHeap PQ2");
+	Leftist pq1("LeftistHeap PQ1");
+	Leftist pq2("LeftistHeap PQ2");
 	Leftist pq3("LeftistHeap PQ3");
 	Leftist pq4("LeftistHeap PQ4");
-	Leftist pq5("LeftistHeapPQ5");
-	Leftist pq6("LeftistHeapPQ6");
-	*/
+	Leftist pq5("LeftistHeap PQ5");
+	Leftist pq6("LeftistHeap PQ6");
+	
 	ifstream fin;
 	fin.open("Prog5In.txt");
 	assert(fin);
 
 	insertNext(pq1, fin, HOWMANY);
-	/*insertNext(pq2, fin, HOWMANY);
+	insertNext(pq2, fin, HOWMANY);
 	insertNext(pq3, fin, HOWMANY);
 	insertNext(pq4, fin, HOWMANY);
 	insertNext(pq5, fin, HOWMANY);
-	insertNext(pq6, fin);*/
+	insertNext(pq6, fin);
 
 	cout << pq1.toString(PRINTSIZE);
 	ofstream fout;
 	fout.open("prog5out.txt");
+	
+	
+	
 	//cout << pq1.toString(PRINTSIZE);
 
 	/*for (int ct = 0; ct < DELETE_CT && !pq1.isEmpty(); ct++){
