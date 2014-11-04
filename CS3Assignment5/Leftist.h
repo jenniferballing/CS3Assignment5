@@ -15,7 +15,7 @@ public:
 	string toString(int size)const;
 	string treeString(Node *, string)const;
 	Node* findParent(Node *, Node*)const;
-	bool isHappy(ItemType &);	
+	//int setNullPathLength(Node *);	
 private:
 	string indent = " ";
 	Node *root;

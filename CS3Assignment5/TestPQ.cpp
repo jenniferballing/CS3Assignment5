@@ -9,7 +9,7 @@ void insertNext(PQ & pq, ifstream & fin, int limit = 0);
 int main()
 {
 	clock_t start = clock();
-	int const DELETE_CT = 20;
+	int const DELETE_CT = 1;
 	int const PRINTSIZE = 5;
 	int const HOWMANY = 5;  // How many values to read from each file.  If HOWMANY = 0, read all values.
 	// SkewHeap pq1("SkewHeap PQ1");
