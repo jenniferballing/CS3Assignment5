@@ -72,9 +72,16 @@ Node* Leftist::findParent(Node* child, Node* root) const
 }
 ItemType Leftist::deleteMax()
 {
-	Node *right = root->right, *left = root->left;
-	Node *merged = merge(right, left);
-	return root->element;	
+	Node* oldRoot = root;
+	Node* right = NULL, *left=NULL;
+	if (root->right != NULL) right = root->right;	
+	if(root->left != NULL) left = root->left;
+
+	if (right->element.priority > left->element.priority) root = right;	
+	else if (left->element.priority > right->element.priority) root = left;
+	
+	Node *returned = merge(right, left);	
+	return oldRoot->element;	
 }
 Node* Leftist::merge(Node* right, Node* left)
 {
@@ -83,15 +90,17 @@ Node* Leftist::merge(Node* right, Node* left)
 	Node* newRoot = NULL;
 
 	if (right->element.priority > left->element.priority)
-	{
+	{		
+		right = merge(right->right, left);
 		newRoot = right;
-		right = merge(right->right, left);		
 	}
-	if (left->element.priority > right->element.priority)
+	else if (left->element.priority > right->element.priority)
 	{
-		newRoot = left;
 		left = merge(right, left->right);
+		newRoot = left;
 	}
+
+
 	checkSwap(right, left);
 	return newRoot;
 }
@@ -119,7 +128,7 @@ void Leftist::merge(PQ *h)
 string Leftist::toString(int printSize)const
 {
 	if (printSize > size)printSize = size;
-	string tree = name + " current size = " + to_string(size);
+	string tree = name;// +" current size = " + to_string(size);
 	string i = "  ";
 	tree += treeString(root, i);
 	return tree;
